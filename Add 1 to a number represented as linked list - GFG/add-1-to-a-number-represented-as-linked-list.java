@@ -1,0 +1,89 @@
+// { Driver Code Starts
+import java.io.*;
+import java.util.*;
+class Node
+{
+    int data;
+    Node next;
+    
+    Node(int x)
+    {
+        data = x;
+        next = null;
+    }
+}
+class GfG
+{
+    public static void printList(Node node) 
+    { 
+        while (node != null)
+        { 
+            System.out.print(node.data);
+            node = node.next; 
+        }  
+        System.out.println();
+    } 
+    public static void main(String args[])throws IOException
+        {
+            Scanner sc = new Scanner(System.in);
+            int t = sc.nextInt();
+            while(t-->0)
+                {
+                    String s = sc.next();
+                    Node head = new Node( s.charAt(0) - '0' );
+                    Node tail = head;
+                    for(int i=1; i<s.length(); i++)
+                    {
+                        tail.next = new Node( s.charAt(i) - '0' );
+                        tail = tail.next;
+                    }
+                    Solution obj = new Solution();
+                    head = obj.addOne(head);
+                    printList(head); 
+                }
+        }
+}// } Driver Code Ends
+
+
+/*
+class Node{
+    int data;
+    Node next;
+    
+    Node(int x){
+        data = x;
+        next = null;
+    }
+} 
+*/
+
+class Solution
+{
+    public static Node addOne(Node head) 
+    { 
+        int x=add(head,0);
+        if(x==1)
+        {
+            Node temp=new Node(x);
+            temp.next=head;
+            head=temp;
+        }
+        return head;
+    }
+    static int add(Node head,int c)
+    {
+        if(head==null)
+        return 1;
+        int carry=add(head.next,c);
+        int val = head.data+carry;
+        if(val>=10)
+        {
+            val=val%10;
+            carry=1;
+        }
+        else
+        carry=0;
+        head.data=val;
+        return carry;
+    }
+}
