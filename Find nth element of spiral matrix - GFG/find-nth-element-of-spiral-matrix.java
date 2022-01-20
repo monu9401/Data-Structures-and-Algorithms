@@ -57,7 +57,7 @@ class GfG
 	            return A[i][j];
 	        }
 	        maxr--;
-	        for(int i=maxr,j=minc;i>=minr && count<total;j--)
+	        for(int i=maxr,j=minc;i>=minr && count<total;i--)
 	        {
 	            count++;
 	            if(count==k)
