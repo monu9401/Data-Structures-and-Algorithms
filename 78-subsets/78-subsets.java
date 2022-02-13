@@ -1,24 +1,35 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> list = new ArrayList<>();
-        int l = nums.length;
-        int s = (int)Math.pow(2,l);
-        for(int i=0;i<s;i++)
+        
+        List<List<Integer>> al = new ArrayList<>();
+        int n = nums.length;
+        int total = (int)Math.pow(2,n);
+        for(int i=0;i<total;i++)
         {
-            String bin = Integer.toBinaryString(i);
-            while(bin.length()<l)
-                bin="0"+bin;
-            List<Integer> l1 = new ArrayList<>();
-            for(int j=0;j<bin.length();j++)
+            String s = binary(i,n);
+            List<Integer> list = new ArrayList<>();
+            for(int j=0;j<n;j++)
             {
-                char ch = bin.charAt(j);
-                if(ch=='1')
+                if(s.charAt(j)=='1')
                 {
-                    l1.add(nums[j]);
+                    list.add(nums[j]);
                 }
             }
-            list.add(l1);
+            al.add(list);
         }
-        return list;
+        return al;
+    }
+    public String binary(int x,int n)
+    {
+        StringBuilder sb = new StringBuilder("");
+        while(x!=0)
+        {
+            int r=x%2;
+            sb.append(r);
+            x=x/2;
+        }
+        while(sb.length()!=n)
+            sb.append("0");
+        return sb.reverse().toString();
     }
 }
